@@ -4,7 +4,7 @@ import styles from './index.css'
 import { connect } from 'react-redux'
 
 import Map from '../Map'
-import TimeSlider from '../../components/TimeSlider'
+import TimeSlider from '../TimeSlider'
 
 class App extends Component {
   render() {
