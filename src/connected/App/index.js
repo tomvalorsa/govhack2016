@@ -5,12 +5,13 @@ import { connect } from 'react-redux'
 
 import Map from '../Map'
 import TimeSlider from '../../components/TimeSlider'
+import Canvas from '../../components/Canvas'
 
 class App extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <Map />
+        <Canvas />
         <TimeSlider />
       </div>
     )
