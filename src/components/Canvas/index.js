@@ -4,6 +4,10 @@ import d3 from 'd3'
 import 'd3-zoom'
 
 export default class Canvas extends Component {
+  constructor(props){
+    super(props)
+    this.update = this.update.bind(this)
+  }
   dottype(d) {
     d.x = +d.x;
     d.y = +d.y;
@@ -22,10 +26,17 @@ export default class Canvas extends Component {
   dragended(d) {
     d3.select(this).classed(styles.dragging, false);
   }
-  componentDidMount() {
-    this.updateCanvas()
+  componentDidMount(){
+    this.update()
+    // window.addEventListener('resize', this.update)
   }
-  updateCanvas() {
+  componentDidUpdate(){
+    this.update()
+  }
+  // componentWillUnmount(){
+  //   window.removeEventListener('resize', this.update)
+  // }
+  update() {
     let { width, height } = this.refs.canvas.getBoundingClientRect()
     let margin = {top: -5, right: -5, bottom: -5, left: -5}
     width = width - margin.left - margin.right
@@ -33,13 +44,13 @@ export default class Canvas extends Component {
 
     let zoom = d3.behavior.zoom()
         .scaleExtent([1, 10])
-        .on("zoom", this.zoomed);
+        .on("zoom", this.zoomed)
 
     let drag = d3.behavior.drag()
         .origin(function(d) { return d; })
         .on("dragstart", this.dragstarted)
         .on("drag", this.dragged)
-        .on("dragend", this.dragended);
+        .on("dragend", this.dragended)
 
     let svg = d3.select(this.refs.canvas).append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -52,9 +63,9 @@ export default class Canvas extends Component {
         .attr("width", width)
         .attr("height", height)
         .style("fill", "none")
-        .style("pointer-events", "all");
+        .style("pointer-events", "all")
 
-    let container = this.container = svg.append("g");
+    let container = this.container = svg.append("g")
 
     container.append("g")
         .attr("class", styles.axis)
@@ -64,7 +75,7 @@ export default class Canvas extends Component {
         .attr("x1", function(d) { return d; })
         .attr("y1", 0)
         .attr("x2", function(d) { return d; })
-        .attr("y2", height);
+        .attr("y2", height)
 
     container.append("g")
         .attr("class", styles.axis)
@@ -74,7 +85,7 @@ export default class Canvas extends Component {
         .attr("x1", 0)
         .attr("y1", function(d) { return d; })
         .attr("x2", width)
-        .attr("y2", function(d) { return d; });
+        .attr("y2", function(d) { return d; })
 
     let dots = [
       {x: 50, y: 100},
@@ -91,7 +102,7 @@ export default class Canvas extends Component {
         .attr("r", 5)
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; })
-        .call(drag);
+        .call(drag)
   }
   render() {
     return <div ref="canvas" className={styles.container}></div>
