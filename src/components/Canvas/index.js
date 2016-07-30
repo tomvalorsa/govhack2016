@@ -8,11 +8,6 @@ export default class Canvas extends Component {
     super(props)
     this.update = this.update.bind(this)
   }
-  dottype(d) {
-    d.x = +d.x;
-    d.y = +d.y;
-    return d;
-  }
   zoomed = () => {
     this.container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   }
@@ -48,7 +43,7 @@ export default class Canvas extends Component {
         .on("zoom", this.zoomed)
 
     let drag = d3.behavior.drag()
-        .origin(function(d) { return d; })
+        .origin(d => d)
         .on("dragstart", this.dragstarted)
         .on("drag", this.dragged)
         .on("dragend", this.dragended)
@@ -73,9 +68,9 @@ export default class Canvas extends Component {
       .selectAll("line")
         .data(d3.range(0, width, 10))
       .enter().append("line")
-        .attr("x1", function(d) { return d; })
+        .attr("x1", d => d)
         .attr("y1", 0)
-        .attr("x2", function(d) { return d; })
+        .attr("x2", d => d)
         .attr("y2", height)
 
     container.append("g")
@@ -84,9 +79,9 @@ export default class Canvas extends Component {
         .data(d3.range(0, height, 10))
       .enter().append("line")
         .attr("x1", 0)
-        .attr("y1", function(d) { return d; })
+        .attr("y1", d => d)
         .attr("x2", width)
-        .attr("y2", function(d) { return d; })
+        .attr("y2", d => d)
 
     let dots = [
       {x: 50, y: 100},
@@ -101,8 +96,8 @@ export default class Canvas extends Component {
         .data(dots)
       .enter().append("circle")
         .attr("r", 5)
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y)
         .call(drag)
   }
   render() {
