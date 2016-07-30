@@ -9,6 +9,7 @@ import Map from '../Map'
 import Canvas from '../Canvas'
 import TimeSlider from '../TimeSlider'
 import Legend from '../Legend'
+import About from '../About'
 
 class App extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class App extends Component {
         { sa3s.loaded ? <Canvas /> : null }
         <TimeSlider />
         <Legend />
+        <About />
       </div>
     )
   }
