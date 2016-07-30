@@ -21,7 +21,7 @@
     background-image: -moz-linear-gradient(#2196F3, #2196F3);
     background-image: -o-linear-gradient(#2196F3, #2196F3);
     background-image: linear-gradient(#2196F3, #2196F3);
-    background-size: 50% 100%;
+    background-size: 0% 100%;
     background-repeat: no-repeat;
     border-radius: 10px;
     cursor: pointer;
