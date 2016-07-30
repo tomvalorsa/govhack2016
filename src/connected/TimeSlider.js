@@ -1,6 +1,6 @@
 import TimeSlider from '../components/TimeSlider'
 import { connect } from 'react-redux'
-import { setYear, setPlaying, incrementYear } from 'actions/year'
+import { setYear, setPlaying, incrementYear } from 'actions/timeline'
 
 export default connect(state => {
   return {

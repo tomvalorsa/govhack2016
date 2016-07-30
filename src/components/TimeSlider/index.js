@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styles from './index.css'
 import cssUtil from '../../cssUtil.css'
 import cls from 'classnames'
-import { yearRange } from 'reducers/year'
+import { yearRange } from 'reducers/timeline'
 import { PlayIcon, PauseIcon } from '../Icons'
 
 export default class TimeSlider extends Component {
