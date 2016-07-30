@@ -1,4 +1,4 @@
-# Project Skeleton
+# Govhack 2016
 
 - react
 - redux
