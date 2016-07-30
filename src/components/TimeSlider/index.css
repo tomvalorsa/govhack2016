@@ -10,7 +10,10 @@
   box-shadow: 0 -3px 6px rgba(0,0,0,0.16), 0 -3px 6px rgba(0,0,0,0.23);
 
   input[type=range] {
+    position: relative;
+    left: -10px;
     margin: auto;
+    vertical-align: middle;
     outline: none;
     padding: 0;
     width: 50%;
@@ -63,4 +66,19 @@
     border-radius: 100%;
     box-shadow: 0 0 1px 0px rgba(0,0,0,0.1);
   }
+}
+
+.label {
+  padding-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.iconContainer {
+  display: inline-block;
+  height: 30px;
+  vertical-align: middle;
+  cursor: pointer;
+  position: relative;
+  left: -20px;
 }
