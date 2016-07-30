@@ -8,11 +8,6 @@ export default class Canvas extends Component {
     super(props)
     this.update = this.update.bind(this)
   }
-  dottype(d) {
-    d.x = +d.x;
-    d.y = +d.y;
-    return d;
-  }
   zoomed = () => {
     this.container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   }
@@ -30,13 +25,15 @@ export default class Canvas extends Component {
     this.update()
     // window.addEventListener('resize', this.update)
   }
-  componentDidUpdate(){
-    this.update()
-  }
+  // componentDidUpdate(){
+  //   this.update()
+  // }
   // componentWillUnmount(){
   //   window.removeEventListener('resize', this.update)
   // }
   update() {
+    let { sa3s } = this.props
+    console.log("sa3s", sa3s)
     let { width, height } = this.refs.canvas.getBoundingClientRect()
     let margin = {top: -5, right: -5, bottom: -5, left: -5}
     width = width - margin.left - margin.right
@@ -47,7 +44,7 @@ export default class Canvas extends Component {
         .on("zoom", this.zoomed)
 
     let drag = d3.behavior.drag()
-        .origin(function(d) { return d; })
+        .origin(d => d)
         .on("dragstart", this.dragstarted)
         .on("drag", this.dragged)
         .on("dragend", this.dragended)
@@ -72,9 +69,9 @@ export default class Canvas extends Component {
       .selectAll("line")
         .data(d3.range(0, width, 10))
       .enter().append("line")
-        .attr("x1", function(d) { return d; })
+        .attr("x1", d => d)
         .attr("y1", 0)
-        .attr("x2", function(d) { return d; })
+        .attr("x2", d => d)
         .attr("y2", height)
 
     container.append("g")
@@ -83,26 +80,24 @@ export default class Canvas extends Component {
         .data(d3.range(0, height, 10))
       .enter().append("line")
         .attr("x1", 0)
-        .attr("y1", function(d) { return d; })
+        .attr("y1", d => d)
         .attr("x2", width)
-        .attr("y2", function(d) { return d; })
+        .attr("y2", d => d)
 
-    let dots = [
-      {x: 50, y: 100},
-      {x: 100, y: 50},
-      {x: 100, y: 200},
-      {x: 200, y: 150}
-    ]
+    let projection = this.projection = d3.geo.mercator()
+        .center([151.14693174483754, -33.90825257141242])
+        .translate([width / 2, height / 2])
+        .scale(1000);
 
-    let dot = container.append("g")
-        .attr("class", styles.dot)
-      .selectAll("circle")
-        .data(dots)
-      .enter().append("circle")
-        .attr("r", 5)
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-        .call(drag)
+    let path = d3.geo.path()
+      .projection(projection);
+
+    container.selectAll("path")
+        .data(sa3s.data)
+      .enter().append("path")
+        .attr("d", path)
+        .attr("fill", 'none')
+        .attr("stroke", 'black')
   }
   render() {
     return <div ref="canvas" className={styles.container}></div>
