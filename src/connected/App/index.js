@@ -3,11 +3,16 @@ import styles from './index.css'
 
 import { connect } from 'react-redux'
 
+import { loadSA3s } from 'actions/sa3s'
+
 import Map from '../Map'
-import Canvas from '../../components/Canvas'
+import Canvas from '../Canvas'
 import TimeSlider from '../TimeSlider'
 
 class App extends Component {
+  componentDidMount() {
+    this.props.load()
+  }
   render() {
     return (
       <div className={styles.container}>
@@ -18,4 +23,4 @@ class App extends Component {
   }
 }
 
-export default connect(state => ({test: state.app}))(App)
+export default connect(state => ({test: state.app}), {load: loadSA3s})(App)

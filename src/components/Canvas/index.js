@@ -37,6 +37,7 @@ export default class Canvas extends Component {
   //   window.removeEventListener('resize', this.update)
   // }
   update() {
+    console.log("update", this.props)
     let { width, height } = this.refs.canvas.getBoundingClientRect()
     let margin = {top: -5, right: -5, bottom: -5, left: -5}
     width = width - margin.left - margin.right
