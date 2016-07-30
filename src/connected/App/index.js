@@ -14,13 +14,14 @@ class App extends Component {
     this.props.load()
   }
   render() {
+    let { sa3s } = this.props
     return (
       <div className={styles.container}>
-        <Canvas />
+        { sa3s.loaded ? <Canvas /> : null }
         <TimeSlider />
       </div>
     )
   }
 }
 
-export default connect(state => ({test: state.app}), {load: loadSA3s})(App)
+export default connect(state => ({sa3s: state.sa3s, test: state.app}), {load: loadSA3s})(App)

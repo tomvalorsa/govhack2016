@@ -25,14 +25,15 @@ export default class Canvas extends Component {
     this.update()
     // window.addEventListener('resize', this.update)
   }
-  componentDidUpdate(){
-    this.update()
-  }
+  // componentDidUpdate(){
+  //   this.update()
+  // }
   // componentWillUnmount(){
   //   window.removeEventListener('resize', this.update)
   // }
   update() {
-    console.log("update", this.props)
+    let { sa3s } = this.props
+    console.log("sa3s", sa3s)
     let { width, height } = this.refs.canvas.getBoundingClientRect()
     let margin = {top: -5, right: -5, bottom: -5, left: -5}
     width = width - margin.left - margin.right
@@ -83,22 +84,20 @@ export default class Canvas extends Component {
         .attr("x2", width)
         .attr("y2", d => d)
 
-    let dots = [
-      {x: 50, y: 100},
-      {x: 100, y: 50},
-      {x: 100, y: 200},
-      {x: 200, y: 150}
-    ]
+    let projection = this.projection = d3.geo.mercator()
+        .center([151.14693174483754, -33.90825257141242])
+        .translate([width / 2, height / 2])
+        .scale(1000);
 
-    let dot = container.append("g")
-        .attr("class", styles.dot)
-      .selectAll("circle")
-        .data(dots)
-      .enter().append("circle")
-        .attr("r", 5)
-        .attr("cx", d => d.x)
-        .attr("cy", d => d.y)
-        .call(drag)
+    let path = d3.geo.path()
+      .projection(projection);
+
+    container.selectAll("path")
+        .data(sa3s.data)
+      .enter().append("path")
+        .attr("d", path)
+        .attr("fill", 'none')
+        .attr("stroke", 'black')
   }
   render() {
     return <div ref="canvas" className={styles.container}></div>

@@ -1,12 +1,24 @@
-import { LOADED_SA3S } from 'actionTypes'
+import { LOADING_SA3S, LOADED_SA3S } from 'actionTypes'
 
-const initialState = {}
+const initialState = {
+  loading: false,
+  loaded: false,
+  data: []
+}
 
 export default function(state = initialState, {type, payload}) {
   switch(type) {
+    case LOADING_SA3S:
+      return {
+        ...state,
+        loading: true
+      }
     case LOADED_SA3S:
-      console.log("LOADED_SA3S", payload)
-      return payload
+      return {
+        ...state,
+        loaded: true,
+        data: payload
+      }
     default:
       return state
   }
