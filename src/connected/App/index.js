@@ -8,6 +8,7 @@ import { loadSA3s } from 'actions/sa3s'
 import Map from '../Map'
 import Canvas from '../Canvas'
 import TimeSlider from '../TimeSlider'
+import Legend from '../Legend'
 
 class App extends Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class App extends Component {
       <div className={styles.container}>
         { sa3s.loaded ? <Canvas /> : null }
         <TimeSlider />
+        <Legend />
       </div>
     )
   }
