@@ -42,8 +42,15 @@ export default class TimeSlider extends Component {
     }
   }
   interval() {
-    this.props.incrementYear()
-    this.setSliderBackground()
+    let { year, incrementYear, setPlaying } = this.props
+    let max = yearRange[1]
+
+    if (year === max) {
+      setPlaying(false)
+    } else {
+      incrementYear()
+      this.setSliderBackground()
+    }
   }
   setSliderBackground() {
     let { slider } = this.refs
