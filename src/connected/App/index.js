@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Map from '../Map'
 import Canvas from '../../components/Canvas'
 import TimeSlider from '../TimeSlider'
+import Legend from '../Legend'
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
       <div className={styles.container}>
         <Canvas />
         <TimeSlider />
+        <Legend />
       </div>
     )
   }
