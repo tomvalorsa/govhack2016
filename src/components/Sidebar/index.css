@@ -3,7 +3,7 @@
   height: 100%;
   display: inline-block;
   vertical-align: top;
-  box-shadow: 3px 0 5px rgba(0,0,0,0.16), 3px 0 5px rgba(0,0,0,0.23);
+  border-right: 1px solid #eee;
 }
 
 .contentContainer {

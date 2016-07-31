@@ -1,5 +1,5 @@
 .container {
-  border-bottom: 1px solid blue;
+  border-bottom: 1px solid #eee;
   display: inline-block;
   width: 100%;
 }
@@ -10,10 +10,10 @@
   display: inline-block;
   width: calc(100% / 3);
   text-align: center;
-  border-right: 1px solid blue;
+  border-right: 1px solid #eee;
 
   &.active {
-    background-color: steelblue;
+    background-color: #eee;
   }
 
   &:last-child {
