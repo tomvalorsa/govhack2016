@@ -6,10 +6,15 @@
 
 .tab {
   height: 50px;
+  cursor: pointer;
   display: inline-block;
   width: calc(100% / 3);
   text-align: center;
   border-right: 1px solid blue;
+
+  &.active {
+    background-color: steelblue;
+  }
 
   &:last-child {
     border-right: none;

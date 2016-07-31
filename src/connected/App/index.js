@@ -11,7 +11,7 @@ import TimeSlider from '../TimeSlider'
 import Legend from '../Legend'
 import About from '../About'
 import Sidebar from '../../components/Sidebar'
-import TabSelector from '../../components/TabSelector'
+import TabSelector from '../TabSelector'
 import ContentPane from '../../components/ContentPane'
 
 class App extends Component {
@@ -20,6 +20,7 @@ class App extends Component {
   }
   render() {
     let { sa3s } = this.props
+
     return (
       <div className={styles.container}>
         <div className={styles.left}>
