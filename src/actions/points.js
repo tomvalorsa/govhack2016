@@ -1,8 +1,8 @@
 import d3 from 'd3'
 import { LOADING_POINTS, LOADED_POINTS } from 'actionTypes'
 
-let designDataPath = require('../../data/design_data_slim.csv')
-let patentDataPath = require('../../data/patent_data_slim.csv')
+let designDataPath = require('../../data/designs.json')
+let patentDataPath = require('../../data/patents.json')
 
 export const loadPoints = (year) => (dispatch, getState) => {
   let { loading, loaded } = getState().points
@@ -12,18 +12,18 @@ export const loadPoints = (year) => (dispatch, getState) => {
       payload: 2
     })
     
-    d3.csv(designDataPath)
-      .row(d => d)
-      .get((error, designs) => dispatch({
+    d3.json(designDataPath, data => {
+      dispatch({
         type: LOADED_POINTS,
-        payload: { designs }
-      }))
+        payload: { designs: data.features.slice(0, 100) }
+      })
+    })
 
-    d3.csv(patentDataPath)
-      .row(d => d)
-      .get((error, patents) => dispatch({
+    d3.json(patentDataPath, data => {
+      dispatch({
         type: LOADED_POINTS,
-        payload: { patents }
-      }))
+        payload: { patents: data.features.slice(0, 100) }
+      })
+    })
   }
 }

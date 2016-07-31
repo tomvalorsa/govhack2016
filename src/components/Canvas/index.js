@@ -131,17 +131,19 @@ export default class Canvas extends Component {
         .data(sa3s.data)
       .enter().append("path")
         .attr("d", path)
+        .attr("class", styles.geometry)
         .attr("fill", 'none')
         .attr("stroke", 'black')
 
     //point logic here
 
-    _.values(points.data).forEach(value => {
-      console.log("value", value)
-      svg.append("path")
-        .data(value)
-        .attr("d", path)
-        .attr("class", styles.point)
+    Object.keys(points.data).forEach(key => {
+      console.log("style", styles[key])
+      container.selectAll("path")
+          .data(points.data[key])
+        .enter().append("path")
+          .attr("d", path)
+          .attr("class", `${styles.point} ${styles[key]}`)
     })
   }
   render() {
