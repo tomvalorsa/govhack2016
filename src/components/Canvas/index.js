@@ -10,29 +10,8 @@ export default class Canvas extends Component {
     this.update = this.update.bind(this)
   }
   zoomed = () => {
-    // this.zoom.translate(panLimit());
     this.container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   }
-  // panLimit = () => {
-  //   let divisor = {h: this.height / ((y.domain()[1]-y.domain()[0])*zoom.scale()), w: this.width / ((x.domain()[1]-x.domain()[0])*zoom.scale())},
-  //     minX = -(((x.domain()[0]-x.domain()[1])*zoom.scale())+(panExtent.x[1]-(panExtent.x[1]-(width/divisor.w)))),
-  //     minY = -(((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-(panExtent.y[1]-(height*(zoom.scale())/divisor.h))))*divisor.h,
-  //     maxX = -(((x.domain()[0]-x.domain()[1]))+(panExtent.x[1]-panExtent.x[0]))*divisor.w*zoom.scale(),
-  //     maxY = (((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-panExtent.y[0]))*divisor.h*zoom.scale(), 
-  
-  //     tx = x.domain()[0] < panExtent.x[0] ? 
-  //         minX : 
-  //         x.domain()[1] > panExtent.x[1] ? 
-  //           maxX : 
-  //           zoom.translate()[0],
-  //     ty = y.domain()[0]  < panExtent.y[0]? 
-  //         minY : 
-  //         y.domain()[1] > panExtent.y[1] ? 
-  //           maxY : 
-  //           zoom.translate()[1];
-    
-  //   return [tx,ty];
-  // }
   dragstarted(d) {
     d3.event.sourceEvent.stopPropagation();
     d3.select(this).classed(styles.dragging, true);
@@ -45,8 +24,9 @@ export default class Canvas extends Component {
     d3.select(this).classed(styles.dragging, false);
   }
   componentDidMount(){
-    let { sa3s } = this.props
     console.log("update", this.props)
+
+    let { sa3s } = this.props
     let { width, height } = this.refs.canvas.getBoundingClientRect()
     let margin = {top: -5, right: -5, bottom: -5, left: -5}
     width = this.width = width - margin.left - margin.right
@@ -123,14 +103,10 @@ export default class Canvas extends Component {
         .attr("class", styles.points)
 
     this.update()
-    // window.addEventListener('resize', this.update)
   }
   componentDidUpdate(){
     this.update()
   }
-  // componentWillUnmount(){
-  //   window.removeEventListener('resize', this.update)
-  // }
   update() {
     console.log("canvas update!", this.props, styles.patents)
     let { points, datasets } = this.props
