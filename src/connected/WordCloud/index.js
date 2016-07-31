@@ -52,7 +52,7 @@ class TabSet extends Component {
     return (
       <div className={styles.tabSetContainer}>
         <div className={styles.typeContainer}>
-          {['Patents', 'Trademarks', 'Designs'].map(name => {
+          {['Trademarks', 'Designs'].map(name => {
             let style = {}
             if (name === type) {
               style.borderBottom = activeBorder
