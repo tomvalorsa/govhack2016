@@ -10,6 +10,7 @@ export default connect(state => {
 
   return {
     sa3s: state.sa3s,
-    points: points
+    points: points,
+    datasets: state.datasets
   }
 })(Canvas)

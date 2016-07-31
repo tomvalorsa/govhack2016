@@ -1,4 +1,6 @@
 import { LOADING_SA3S, LOADED_SA3S } from 'actionTypes'
+import topojson from 'topojson'
+
 
 const initialState = {
   loading: false,
@@ -17,7 +19,7 @@ export default function(state = initialState, {type, payload}) {
       return {
         ...state,
         loaded: true,
-        data: payload
+        data: topojson.feature(payload, payload.objects['SA3Data']).features
       }
     default:
       return state

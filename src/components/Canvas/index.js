@@ -90,13 +90,17 @@ export default class Canvas extends Component {
     let geometries = this.geometries = container.append("g")
         .attr("class", styles.geometries)
 
-    geometries
-      .selectAll("path")
+    let colorScale = this.colorScale = d3.scale.linear()
+      .domain([d3.min(sa3s.data, sa3 => +sa3.properties['Patents (per 10,000 residents)']), 
+                    d3.max(sa3s.data, sa3 => +sa3.properties['Patents (per 10,000 residents)'])])
+      .range(["#FFFFFF", "#2196F3"])
+
+    geometries.selectAll(`.${styles.geometry}`)
         .data(sa3s.data)
       .enter().append("path")
-        .attr("d", path)
+        .attr("d", this.path)
         .attr("class", styles.geometry)
-        .attr("fill", 'none')
+        .attr("fill", d => this.props.datasets.trademarks ? colorScale(+d.properties['Patents (per 10,000 residents)']) : 'white')
         .attr("stroke", 'black')
 
     let points = this.points = container.append("g")
@@ -109,7 +113,14 @@ export default class Canvas extends Component {
   }
   update() {
     console.log("canvas update!", this.props, styles.patents)
-    let { points, datasets } = this.props
+    let { sa3s, points, datasets } = this.props
+
+    let geometryData = this.geometries
+      .selectAll(`.${styles.geometry}`)
+        .data(sa3s.data)
+
+    geometryData.attr("fill", d => this.props.datasets.trademarks ? this.colorScale(+d.properties['Patents (per 10,000 residents)']) : 'white')
+
     //point logic here
 
     Object.keys(points).forEach(key => {
