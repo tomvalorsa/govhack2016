@@ -3,34 +3,55 @@ import styles from './index.css'
 
 import { connect } from 'react-redux'
 
-import { loadSA3s } from 'actions/sa3s'
-import { loadPoints } from 'actions/points'
-
 import Map from '../Map'
-import Canvas from '../Canvas'
-import TimeSlider from '../TimeSlider'
-import Legend from '../Legend'
 import About from '../About'
+import Sidebar from '../Sidebar'
+import TabSelector from '../TabSelector'
+import ContentPane from '../../components/ContentPane'
+import StateContent from '../StateContent'
 
 class App extends Component {
-  componentDidMount() {
-    this.props.loadSA3s()
-    this.props.loadPoints()
+  getContent() {
+    let { tab } = this.props
+
+    let contentRef = {
+      '1': <CartoDbIframe />,
+      '2': <StateContent />,
+      '3': null
+    }
+
+    return contentRef[tab] || null
   }
   render() {
-    let { dataLoaded } = this.props
     return (
       <div className={styles.container}>
-        { dataLoaded ? <Canvas /> : null }
-        <TimeSlider />
-        <Legend />
+        <div className={styles.left}>
+          <Sidebar />
+        </div>
+        <div className={styles.right}>
+          <TabSelector />
+          <ContentPane>
+            {this.getContent()}
+          </ContentPane>
+        </div>
         <About />
       </div>
     )
   }
 }
 
-export default connect(state => ({
-  dataLoaded: state.sa3s.loaded && state.points.loaded, 
-  test: state.app
-}), {loadSA3s, loadPoints})(App)
+export default connect(state => {
+  return {
+    tab: state.app.tab
+  }
+}, {})(App)
+
+
+const CartoDbIframe = () => (
+  <iframe
+    width="100%"
+    height="100%"
+    frameBorder="0"
+    src="https://ol-arup.carto.com/viz/b9263822-56b9-11e6-8214-0e233c30368f/embed_map">
+  </iframe>
+)
