@@ -1,7 +1,7 @@
 import { TOGGLE_MODAL, SET_TAB } from 'actionTypes'
 
 const initialState = {
-  modalIsOpen: false,
+  modalIsOpen: true,
   tab: 'National'
 }
 
