@@ -10,6 +10,9 @@ import Canvas from '../Canvas'
 import TimeSlider from '../TimeSlider'
 import Legend from '../Legend'
 import About from '../About'
+import Sidebar from '../../components/Sidebar'
+import TabSelector from '../../components/TabSelector'
+import ContentPane from '../../components/ContentPane'
 
 class App extends Component {
   componentDidMount() {
@@ -19,10 +22,17 @@ class App extends Component {
     let { sa3s } = this.props
     return (
       <div className={styles.container}>
+        <div className={styles.left}>
+          <Sidebar />
+        </div>
+        <div className={styles.right}>
+          <TabSelector />
+          <ContentPane />
+        </div>
         { sa3s.loaded ? <Canvas /> : null }
-        <TimeSlider />
-        <Legend />
-        <About />
+        {/*<TimeSlider />*/}
+        {/*<Legend />*/}
+        {/*<About />*/}
       </div>
     )
   }

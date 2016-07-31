@@ -1,0 +1,17 @@
+.container {
+  border-bottom: 1px solid blue;
+  display: inline-block;
+  width: 100%;
+}
+
+.tab {
+  height: 50px;
+  display: inline-block;
+  width: calc(100% / 3);
+  text-align: center;
+  border-right: 1px solid blue;
+
+  &:last-child {
+    border-right: none;
+  }
+}

@@ -1,3 +1,18 @@
 .container {
   height: 100%;
+  overflow: hidden;
+}
+
+.left {
+  width: 300px;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.right {
+  width: calc(100% - 300px);
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
 }
