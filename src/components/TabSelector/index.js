@@ -11,9 +11,9 @@ export default class TabSelector extends Component {
     let { activeTab, click } = this.props
     return (
       <div className={styles.container}>
-        <Tab name="1" activeTab={activeTab} click={click} />
-        <Tab name="2" activeTab={activeTab} click={click} />
-        <Tab name="3" activeTab={activeTab} click={click} />
+        <Tab name="National" activeTab={activeTab} click={click} />
+        <Tab name="State" activeTab={activeTab} click={click} />
+        <Tab name="Projects" activeTab={activeTab} click={click} />
       </div>
     )
   }
