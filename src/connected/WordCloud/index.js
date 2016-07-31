@@ -40,26 +40,39 @@ class TabSet extends Component {
   render() {
     let { type, year, setYear, setType } = this.props
 
+    // For borders
+    let activeColor = {
+      'Trademarks': '#2196F3',
+      'Patents': '#4CAF50',
+      'Designs': '#f44336'
+    }
+
+    let activeBorder = `1px solid ${activeColor[type]}`
+
     return (
       <div className={styles.tabSetContainer}>
         <div className={styles.typeContainer}>
           {['Patents', 'Trademarks', 'Designs'].map(name => {
-            let classes = [cssUtil.centred]
-            if (name === type) classes.push(styles.active)
+            let style = {}
+            if (name === type) {
+              style.borderBottom = activeBorder
+            }
             return (
               <div className={styles.typeTab} key={name} onClick={() => setType(name)}>
-                <div className={cls(classes)}>{name}</div>
+                <div className={cssUtil.centred} style={style}>{name}</div>
               </div>
             )
           })}
         </div>
         <div className={styles.yearTabContainer}>
           {yearRanges[type].map(value => {
-            let classes = [cssUtil.centred]
-            if (value === year) classes.push(styles.active)
+            let style = {}
+            if (value === year) {
+              style.borderBottom = activeBorder
+            }
             return (
               <div className={styles.yearTab} key={value} onClick={() => setYear(value)}>
-                <div className={cls(classes)}>{value}</div>
+                <div className={cssUtil.centred} style={style}>{value}</div>
               </div>
             )
           })}
