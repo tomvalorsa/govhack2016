@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './index.css'
 import d3 from 'd3'
 import 'd3-zoom'
+import _ from 'lodash'
 
 export default class Canvas extends Component {
   constructor(props){
@@ -9,13 +10,35 @@ export default class Canvas extends Component {
     this.update = this.update.bind(this)
   }
   zoomed = () => {
+    // this.zoom.translate(panLimit());
     this.container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   }
+  // panLimit = () => {
+  //   let divisor = {h: this.height / ((y.domain()[1]-y.domain()[0])*zoom.scale()), w: this.width / ((x.domain()[1]-x.domain()[0])*zoom.scale())},
+  //     minX = -(((x.domain()[0]-x.domain()[1])*zoom.scale())+(panExtent.x[1]-(panExtent.x[1]-(width/divisor.w)))),
+  //     minY = -(((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-(panExtent.y[1]-(height*(zoom.scale())/divisor.h))))*divisor.h,
+  //     maxX = -(((x.domain()[0]-x.domain()[1]))+(panExtent.x[1]-panExtent.x[0]))*divisor.w*zoom.scale(),
+  //     maxY = (((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-panExtent.y[0]))*divisor.h*zoom.scale(), 
+  
+  //     tx = x.domain()[0] < panExtent.x[0] ? 
+  //         minX : 
+  //         x.domain()[1] > panExtent.x[1] ? 
+  //           maxX : 
+  //           zoom.translate()[0],
+  //     ty = y.domain()[0]  < panExtent.y[0]? 
+  //         minY : 
+  //         y.domain()[1] > panExtent.y[1] ? 
+  //           maxY : 
+  //           zoom.translate()[1];
+    
+  //   return [tx,ty];
+  // }
   dragstarted(d) {
     d3.event.sourceEvent.stopPropagation();
     d3.select(this).classed(styles.dragging, true);
   }
   dragged(d) {
+    console.log("dragged", d, d3.event.x, d3.event.y)
     d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
   }
   dragended(d) {
@@ -32,14 +55,26 @@ export default class Canvas extends Component {
   //   window.removeEventListener('resize', this.update)
   // }
   update() {
-    let { sa3s } = this.props
-    console.log("sa3s", sa3s)
+    let { sa3s, points } = this.props
+    console.log("update", this.props)
     let { width, height } = this.refs.canvas.getBoundingClientRect()
     let margin = {top: -5, right: -5, bottom: -5, left: -5}
-    width = width - margin.left - margin.right
-    height = height - margin.top - margin.bottom
+    width = this.width = width - margin.left - margin.right
+    height = this.height = height - margin.top - margin.bottom
 
-    let zoom = d3.behavior.zoom()
+    let panExtent = { x: [0,width], y: [0,height] }
+
+    // let x = d3.scale.linear()
+    //   .domain(panExtent.x)
+    //   .range([0, width]);
+  
+    // let y = d3.scale.linear()
+    //   .domain(panExtent.y)
+    //   .range([height, 0]);
+
+    let zoom = this.zoom = d3.behavior.zoom()
+        // .x(x)
+        // .y(y)
         .scaleExtent([1, 10])
         .on("zoom", this.zoomed)
 
@@ -87,7 +122,7 @@ export default class Canvas extends Component {
     let projection = this.projection = d3.geo.mercator()
         .center([151.14693174483754, -33.90825257141242])
         .translate([width / 2, height / 2])
-        .scale(1000);
+        .scale(2000);
 
     let path = d3.geo.path()
       .projection(projection);
@@ -98,6 +133,16 @@ export default class Canvas extends Component {
         .attr("d", path)
         .attr("fill", 'none')
         .attr("stroke", 'black')
+
+    //point logic here
+
+    _.values(points.data).forEach(value => {
+      console.log("value", value)
+      svg.append("path")
+        .data(value)
+        .attr("d", path)
+        .attr("class", styles.point)
+    })
   }
   render() {
     return <div ref="canvas" className={styles.container}></div>
