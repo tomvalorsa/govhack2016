@@ -5,6 +5,8 @@
   right: 10px;
   border: 1px solid #9b9b9b;
   background-color: rgba(255, 255, 255, 0.9);
+
+  text-transform: capitalize;
 }
 
 .legendItem {

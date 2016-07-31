@@ -1,9 +1,9 @@
 import { TOGGLE_DATASET } from 'actionTypes'
 
 const initialState = {
-  'Patents': true,
-  'Trademarks': true,
-  'Designs': true
+  'patents': true,
+  'trademarks': true,
+  'designs': true
 }
 
 export default function(state = initialState, {type, payload}) {
