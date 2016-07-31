@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './index.css'
 import d3 from 'd3'
 import 'd3-zoom'
+import _ from 'lodash'
 
 export default class Canvas extends Component {
   constructor(props){
@@ -16,30 +17,22 @@ export default class Canvas extends Component {
     d3.select(this).classed(styles.dragging, true);
   }
   dragged(d) {
+    console.log("dragged", d, d3.event.x, d3.event.y)
     d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
   }
   dragended(d) {
     d3.select(this).classed(styles.dragging, false);
   }
   componentDidMount(){
-    this.update()
-    // window.addEventListener('resize', this.update)
-  }
-  // componentDidUpdate(){
-  //   this.update()
-  // }
-  // componentWillUnmount(){
-  //   window.removeEventListener('resize', this.update)
-  // }
-  update() {
+    console.log("update", this.props)
+
     let { sa3s } = this.props
-    console.log("sa3s", sa3s)
     let { width, height } = this.refs.canvas.getBoundingClientRect()
     let margin = {top: -5, right: -5, bottom: -5, left: -5}
-    width = width - margin.left - margin.right
-    height = height - margin.top - margin.bottom
+    width = this.width = width - margin.left - margin.right
+    height = this.height = height - margin.top - margin.bottom
 
-    let zoom = d3.behavior.zoom()
+    let zoom = this.zoom = d3.behavior.zoom()
         .scaleExtent([1, 10])
         .on("zoom", this.zoomed)
 
@@ -87,17 +80,48 @@ export default class Canvas extends Component {
     let projection = this.projection = d3.geo.mercator()
         .center([151.14693174483754, -33.90825257141242])
         .translate([width / 2, height / 2])
-        .scale(1000);
+        .scale(2000);
 
-    let path = d3.geo.path()
-      .projection(projection);
+    let path = this.path = d3.geo.path()
+      .projection(projection)
+      .pointRadius(d => 1)
 
-    container.selectAll("path")
+
+    let geometries = this.geometries = container.append("g")
+        .attr("class", styles.geometries)
+
+    geometries
+      .selectAll("path")
         .data(sa3s.data)
       .enter().append("path")
         .attr("d", path)
+        .attr("class", styles.geometry)
         .attr("fill", 'none')
         .attr("stroke", 'black')
+
+    let points = this.points = container.append("g")
+        .attr("class", styles.points)
+
+    this.update()
+  }
+  componentDidUpdate(){
+    this.update()
+  }
+  update() {
+    console.log("canvas update!", this.props, styles.patents)
+    let { points, datasets } = this.props
+    //point logic here
+
+    Object.keys(points).forEach(key => {
+      let pointData = this.points.selectAll(`.${styles[key]}`)
+          .data(points[key])
+
+      pointData.enter().append("path")
+        .attr("d", this.path)
+        .attr("class", `${styles.point} ${styles[key]}`)
+
+      pointData.exit().remove()
+    })
   }
   render() {
     return <div ref="canvas" className={styles.container}></div>

@@ -6,17 +6,19 @@ import Legend from '../Legend'
 
 import { connect } from 'react-redux'
 import { loadSA3s } from 'actions/sa3s'
+import { loadPoints } from 'actions/points'
 
 class StateContent extends Component {
   componentDidMount() {
-    this.props.load()
+    this.props.loadSA3s()
+    this.props.loadPoints()
   }
   render() {
-    let { sa3s } = this.props
+    let { dataLoaded } = this.props
 
     return (
       <div className={styles.container}>
-        { sa3s.loaded ? <Canvas /> : null }
+        { dataLoaded ? <Canvas /> : null }
         <TimeSlider />
         <Legend />
       </div>
@@ -26,6 +28,6 @@ class StateContent extends Component {
 
 export default connect(state => {
   return {
-    sa3s: state.sa3s
+    dataLoaded: state.sa3s.loaded && state.points.loaded, 
   }
-}, {load: loadSA3s})(StateContent)
+}, {loadSA3s, loadPoints})(StateContent)

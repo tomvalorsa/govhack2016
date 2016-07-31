@@ -21,3 +21,21 @@
   shape-rendering: crispEdges;
   vector-effect: non-scaling-stroke;
 }
+
+.geometry {
+  
+}
+
+.point {
+  fill-opacity: 0.2;
+}
+.designs {
+  fill: #F44336;
+}
+.patents {
+  fill: #4CAF50;
+}
+
+.exit {
+  
+}

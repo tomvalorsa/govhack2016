@@ -1,7 +1,7 @@
 import d3 from 'd3'
 import { LOADING_SA3S, LOADED_SA3S } from 'actionTypes'
 
-let sa3sPath = require('../../data/sa3_data.json')
+let sa3sPath = require('../../data/SA3Data.json')
 
 export const loadSA3s = (year) => (dispatch, getState) => {
   let { loading, loaded } = getState().sa3s
