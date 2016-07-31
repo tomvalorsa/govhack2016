@@ -2,7 +2,7 @@ import { SET_WORDCLOUD_YEAR, SET_WORDCLOUD_TYPE } from 'actionTypes'
 
 const initialState = {
   type: 'Trademarks',
-  year: 2010 // will need to set out acceptable range and default year for each type!!
+  year: 1900 // will need to set out acceptable range and default year for each type!!
 }
 
 
