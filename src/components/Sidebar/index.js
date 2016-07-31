@@ -10,9 +10,9 @@ export default class Sidebar extends Component {
     let { tab } = this.props
 
     let contentRef = {
-      '1': <Content1 tab={tab} />, // can take this tab prop out at the end, just using to see if working
-      '2': <Content2 tab={tab} />,
-      '3': <Content3 tab={tab} />
+      'National': <Content1 tab={tab} />,
+      'State': <Content2 tab={tab} />,
+      'Projects': <Content3 tab={tab} />
     }
 
     return contentRef[tab]
@@ -79,15 +79,19 @@ const Content3 = ({tab}) => (
     <div className={styles.title}>{tab}</div>
 
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit beatae ad voluptates dignissimos placeat error voluptatem at ut tempore maxime magni doloremque ullam suscipit ex, voluptate iusto, commodi? Sint, neque.
+      This data set lets you explore the Trademark, Patent and Design database key words, as mentioned in the application description. As you step through time from the 1990s for the trademark data, these word clouds highlight the most common elements of innovation throughout that decade right up to 2015 datasets.
     </p>
 
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur voluptate iure voluptas, est delectus ratione provident corporis? Deleniti quia neque laboriosam accusamus eaque, dolore, adipisci quaerat reiciendis, molestiae ab minus.
+      The trademark data sets span over 100 years with the first application for trademark within this dataset being from 1906.
     </p>
 
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque facere minus dignissimos enim, reiciendis dolor incidunt error obcaecati omnis eius consectetur, nemo, velit! Accusamus nulla, assumenda nihil explicabo vel, atque.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia commodi repudiandae quas sint, incidunt voluptate, blanditiis cum magni odit, iste voluptatibus excepturi dolore soluta suscipit vel deserunt recusandae at beatae!
+      The design datasets span over 50 years, ranging from 1972 through to 2015.
+    </p>
+
+    <p>
+      The Patent dataset only spans for 2 decades, with the first data available to download being from 2003.
     </p>
 
     <p>Data sets used:</p>

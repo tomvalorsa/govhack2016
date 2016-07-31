@@ -2,7 +2,7 @@ import { TOGGLE_MODAL, SET_TAB } from 'actionTypes'
 
 const initialState = {
   modalIsOpen: false,
-  tab: '1'
+  tab: 'National'
 }
 
 export default function(state = initialState, {type, payload}) {

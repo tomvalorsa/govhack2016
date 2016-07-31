@@ -16,9 +16,9 @@ class App extends Component {
     let { tab } = this.props
 
     let contentRef = {
-      '1': <CartoDbIframe />,
-      '2': <StateContent />,
-      '3': <WordCloud />
+      'National': <CartoDbIframe />,
+      'State': <StateContent />,
+      'Projects': <WordCloud />
     }
 
     return contentRef[tab] || null
