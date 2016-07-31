@@ -62,7 +62,7 @@ const Content2 = ({tab}) => (
       This map allows you to explore the datasets on a state level for Patents, Designs and Trademarks. This map plays through time and shows the innovative ideas as they emerge.
     </p>
     <p>
-      The Patent and Design datasets are shown as points on the map, whilst due to the huge number of trademarks being registered every year, these are shown as a chloropleth map in the background. This was a conscience decision to highlight the patents and design applications to show their location across NSW.
+      The Patent and Design datasets are shown as points on the map, whilst due to the huge number of trademarks being registered every year, these are shown as a chloropleth map in the background. This was a conscious decision to highlight the patents and design applications to show their location across NSW.
     </p>
 
     <p>Data sets used:</p>
@@ -87,10 +87,6 @@ const Content3 = ({tab}) => (
 
     <p>
       The design datasets span over 50 years, ranging from 1972 through to 2015.
-    </p>
-
-    <p>
-      The Patent dataset only spans for 2 decades, with the first data available to download being from 2003.
     </p>
 
     <p>Data sets used:</p>
