@@ -10,7 +10,7 @@ import Canvas from '../Canvas'
 import TimeSlider from '../TimeSlider'
 import Legend from '../Legend'
 import About from '../About'
-import Sidebar from '../../components/Sidebar'
+import Sidebar from '../Sidebar'
 import TabSelector from '../TabSelector'
 import ContentPane from '../../components/ContentPane'
 

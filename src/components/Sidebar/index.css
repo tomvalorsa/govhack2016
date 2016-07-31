@@ -5,3 +5,22 @@
   border-right: 1px solid red;
   vertical-align: top;
 }
+
+.contentContainer {
+  padding: 2em;
+  text-align: justify;
+
+  .title {
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  ul {
+    margin-left: 30px;
+  }
+}
