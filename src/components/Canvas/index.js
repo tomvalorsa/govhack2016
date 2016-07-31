@@ -100,7 +100,7 @@ export default class Canvas extends Component {
       .enter().append("path")
         .attr("d", this.path)
         .attr("class", styles.geometry)
-        .attr("fill", d => this.props.datasets.trademarks ? colorScale(+d.properties['Patents (per 10,000 residents)']) : 'white')
+        .attr("fill", d => this.props.datasets.trademarks && d.properties['Patents (per 10,000 residents)'] !== "NA" ? colorScale(+d.properties['Patents (per 10,000 residents)']) : 'white')
         .attr("stroke", 'black')
 
     let points = this.points = container.append("g")
@@ -119,7 +119,7 @@ export default class Canvas extends Component {
       .selectAll(`.${styles.geometry}`)
         .data(sa3s.data)
 
-    geometryData.attr("fill", d => this.props.datasets.trademarks ? this.colorScale(+d.properties['Patents (per 10,000 residents)']) : 'white')
+    geometryData.attr("fill", d => this.props.datasets.trademarks && d.properties['Patents (per 10,000 residents)'] !== "NA" ? this.colorScale(+d.properties['Patents (per 10,000 residents)']) : 'white')
 
     //point logic here
 
