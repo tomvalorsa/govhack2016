@@ -9,6 +9,7 @@ import Sidebar from '../Sidebar'
 import TabSelector from '../TabSelector'
 import ContentPane from '../../components/ContentPane'
 import StateContent from '../StateContent'
+import WordCloud from '../WordCloud'
 
 class App extends Component {
   getContent() {
@@ -17,7 +18,7 @@ class App extends Component {
     let contentRef = {
       '1': <CartoDbIframe />,
       '2': <StateContent />,
-      '3': null
+      '3': <WordCloud />
     }
 
     return contentRef[tab] || null

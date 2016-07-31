@@ -1,0 +1,43 @@
+.container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.imgContainer {
+  height: calc(100% - 80px);
+  text-align: center;
+}
+
+.yearContainer {
+  height: 80px;
+  border-top: 1px solid red;
+  text-align: center;
+}
+
+.tabSetContainer {
+  .yearTab {
+    display: inline-block;
+    height: 50px;
+    text-align: center;
+    padding: 0 1em;
+    cursor: pointer;
+  }
+}
+
+.yearTabContainer {
+  border-top: 1px solid #eee;
+  display: inline-block;
+}
+
+.typeTab {
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 1em;
+  height: 30px;
+}
+
+.active {
+  border-bottom: 1px solid #2196F3;
+}
