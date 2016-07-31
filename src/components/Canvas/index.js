@@ -45,36 +45,14 @@ export default class Canvas extends Component {
     d3.select(this).classed(styles.dragging, false);
   }
   componentDidMount(){
-    this.update()
-    // window.addEventListener('resize', this.update)
-  }
-  // componentDidUpdate(){
-  //   this.update()
-  // }
-  // componentWillUnmount(){
-  //   window.removeEventListener('resize', this.update)
-  // }
-  update() {
-    let { sa3s, points } = this.props
+    let { sa3s } = this.props
     console.log("update", this.props)
     let { width, height } = this.refs.canvas.getBoundingClientRect()
     let margin = {top: -5, right: -5, bottom: -5, left: -5}
     width = this.width = width - margin.left - margin.right
     height = this.height = height - margin.top - margin.bottom
 
-    // let panExtent = { x: [0,width], y: [0,height] }
-
-    // let x = d3.scale.linear()
-    //   .domain(panExtent.x)
-    //   .range([0, width]);
-  
-    // let y = d3.scale.linear()
-    //   .domain(panExtent.y)
-    //   .range([height, 0]);
-
     let zoom = this.zoom = d3.behavior.zoom()
-        // .x(x)
-        // .y(y)
         .scaleExtent([1, 10])
         .on("zoom", this.zoomed)
 
@@ -124,10 +102,16 @@ export default class Canvas extends Component {
         .translate([width / 2, height / 2])
         .scale(2000);
 
-    let path = d3.geo.path()
-      .projection(projection);
+    let path = this.path = d3.geo.path()
+      .projection(projection)
+      .pointRadius(d => 2)
 
-    container.selectAll("path")
+
+    let geometries = this.geometries = container.append("g")
+        .attr("class", styles.geometries)
+
+    geometries
+      .selectAll("path")
         .data(sa3s.data)
       .enter().append("path")
         .attr("d", path)
@@ -135,15 +119,32 @@ export default class Canvas extends Component {
         .attr("fill", 'none')
         .attr("stroke", 'black')
 
+    let points = this.points = container.append("g")
+        .attr("class", styles.points)
+
+    this.update()
+    // window.addEventListener('resize', this.update)
+  }
+  componentDidUpdate(){
+    this.update()
+  }
+  // componentWillUnmount(){
+  //   window.removeEventListener('resize', this.update)
+  // }
+  update() {
+    console.log("canvas update!", this.props, styles.patents)
+    let { points, datasets } = this.props
     //point logic here
 
-    Object.keys(points.data).forEach(key => {
-      console.log("style", styles[key])
-      container.selectAll("path")
-          .data(points.data[key])
-        .enter().append("path")
-          .attr("d", path)
-          .attr("class", `${styles.point} ${styles[key]}`)
+    Object.keys(points).forEach(key => {
+      let pointData = this.points.selectAll(`.${styles[key]}`)
+          .data(points[key])
+
+      pointData.enter().append("path")
+        .attr("d", this.path)
+        .attr("class", `${styles.point} ${styles[key]}`)
+
+      pointData.exit().remove()
     })
   }
   render() {

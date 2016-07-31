@@ -10,9 +10,9 @@ export default class Legend extends Component {
 
     return (
       <div className={styles.container}>
-        <LegendItem name="Patents" color="#4CAF50" click={click} datasets={datasets} />
-        <LegendItem name="Trademarks" color="#2196F3" click={click} datasets={datasets} />
-        <LegendItem name="Designs" color="#f44336" click={click} datasets={datasets} />
+        <LegendItem name="patents" color="#4CAF50" click={click} datasets={datasets} />
+        <LegendItem name="trademarks" color="#2196F3" click={click} datasets={datasets} />
+        <LegendItem name="designs" color="#f44336" click={click} datasets={datasets} />
       </div>
     )
   }
