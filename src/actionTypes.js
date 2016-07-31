@@ -8,3 +8,4 @@ export const LOADED_SA3S = 'LOADED_SA3S'
 export const TOGGLE_DATASET = 'TOGGLE_DATASET'
 
 export const TOGGLE_MODAL = 'TOGGLE_MODAL'
+export const SET_TAB = 'SET_TAB'

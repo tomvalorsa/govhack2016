@@ -1,0 +1,6 @@
+.container {
+  height: calc(100% - 50px); /*height of tab selector*/
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
