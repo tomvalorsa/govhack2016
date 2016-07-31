@@ -78,9 +78,9 @@ export default class Canvas extends Component {
         .attr("y2", d => d)
 
     let projection = this.projection = d3.geo.mercator()
-        .center([151.14693174483754, -33.90825257141242])
+        .center([148.14693174483754, -33.90825257141242])
         .translate([width / 2, height / 2])
-        .scale(2000);
+        .scale(2500);
 
     let path = this.path = d3.geo.path()
       .projection(projection)
