@@ -84,7 +84,7 @@ export default class Canvas extends Component {
 
     let path = this.path = d3.geo.path()
       .projection(projection)
-      .pointRadius(d => 2)
+      .pointRadius(d => 1)
 
 
     let geometries = this.geometries = container.append("g")
