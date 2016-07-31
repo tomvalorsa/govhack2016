@@ -62,7 +62,7 @@ export default class Canvas extends Component {
     width = this.width = width - margin.left - margin.right
     height = this.height = height - margin.top - margin.bottom
 
-    let panExtent = { x: [0,width], y: [0,height] }
+    // let panExtent = { x: [0,width], y: [0,height] }
 
     // let x = d3.scale.linear()
     //   .domain(panExtent.x)

@@ -15,14 +15,14 @@ export const loadPoints = (year) => (dispatch, getState) => {
     d3.json(designDataPath, data => {
       dispatch({
         type: LOADED_POINTS,
-        payload: { designs: data.features.slice(0, 100) }
+        payload: { designs: data.features }
       })
     })
 
     d3.json(patentDataPath, data => {
       dispatch({
         type: LOADED_POINTS,
-        payload: { patents: data.features.slice(0, 100) }
+        payload: { patents: data.features }
       })
     })
   }
